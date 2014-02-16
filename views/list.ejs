@@ -1,0 +1,61 @@
+<% include header %>
+<% include nav %>
+
+<div class="container">
+    <div class="btn-group">
+      <a href="/" class="btn btn-danger">新建投票项目</a>
+      <a href="/list" class="btn btn-danger active">投票项目列表</a>
+    </div>
+    
+    <table class="table table-striped table-bordered" style="margin-top: 10px;">
+        <tr>
+            <th>项目名称</th>
+            <th>说明</th>
+            <th>可选项</th>
+            <th>类型</th>
+            <th>限制IP</th>
+            <th>过期时间</th>
+            <th>发起人</th>
+            <th style="width: 170px;">操作</th>
+        </tr>
+        <% for ( var i=0; i<vList.length; i++) { %>
+        <tr>
+            <td><%= vList[i]['projName'] %></td>
+            <td>
+                <%= vList[i]['projDesc'] %>
+            </td>
+            <!--<td><%= vList[i]['projItems'][0].item %></td>-->
+            <td>
+                <% for (var j=0; j<vList[i]['projItems'].length; j++) { %>
+                <span>[<%= (j+1) %>] <%= vList[i]['projItems'][j]['item'] %> <span class="badge"><%= vList[i]['projItems'][j]['voteIps'].length %>票</span></span><br/>
+                <% } %>
+            </td>
+            <!--<td><%= vList[i]['vtype'] %></td>-->
+            <td>
+                <% if ( vList[i]['vtype'] == 0 ) { %>
+                单选
+                <% } else { %>
+                多选
+                <% } %>
+            </td>
+            <td>
+                <% if ( vList[i]['ip'] == 0 ) { %>
+                不限制
+                <% } else { %>
+                限制
+                <% } %>
+            </td>
+            <td><%= vList[i]['expDate'] %></td>
+            <td><%= vList[i]['sponsor'] %></td>
+            <td>
+                <a href="/vpage/<%= vList[i]['_id'] %>/<%= vList[i]['projName'] %>" class="btn btn-danger btn-xs" target="_blank">投票页</a>
+                <a href="/rpage/<%= vList[i]['_id'] %>" class="btn btn-danger btn-xs">查看结果</a>
+                <a id="<%= vList[i]['_id'] %>" href="javascript: void(0)" class="btn btn-danger btn-xs delBtn">删除</a>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+    
+</div>
+
+<% include footer %>
