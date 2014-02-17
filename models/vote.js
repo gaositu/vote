@@ -158,9 +158,11 @@ Vote.getFilledProjItems = function (_id, checkedItems, callback) {
             // TODO
         }
         
-        if (! checkedItems instanceof Array) {
+        /*if (! checkedItems instanceof Array) {
             checkedItems = [].push(checkedItems);
-        }
+        }*/
+        
+        checkedItems = [].concat(checkedItems);
         
         len2 = checkedItems.length;
         
