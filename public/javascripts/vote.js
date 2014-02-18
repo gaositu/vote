@@ -1,5 +1,6 @@
 ;(function (window, $, undefined) {
     function Vote () {
+        this.init();
     }
     
     Vote.prototype = {
@@ -68,6 +69,6 @@
         }
     }
     
-    new Vote().init();
+    new Vote();
     
 })(window, jQuery);
